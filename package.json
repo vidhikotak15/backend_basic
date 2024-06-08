@@ -1,0 +1,26 @@
+{
+  "name": "chaibackend",
+  "version": "1.0.0",
+  "description": "a basic app to deploy",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vidhikotak15/backend_basic.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "vidhi kotak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vidhikotak15/backend_basic/issues"
+  },
+  "homepage": "https://github.com/vidhikotak15/backend_basic#readme",
+  "dependencies": {
+    "env": "^0.0.2",
+    "express": "^4.19.2"
+  }
+}

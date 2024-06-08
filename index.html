@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<meta http-equiv="refresh" content="10">-->
+    <title>JPMC</title>
+</head>
+
+<body style="background-color: blueviolet;">
+    <h1 style="color: beige;">I like pizza. we have h1 to h6</h1>
+    <hr>
+    <!-- this is comment -->
+    <p><span style="color: aqua;">Lorem ipsum dolor sit amet consectetur adipisicing elit.</span> Eius officiis, commodi
+        cumque incidunt perspiciatis
+        sequi rem mollitia dicta a iste non eaque, recusandae nesciunt. Ducimus magnam debitis harum ullam dolorum?</p>
+    <a href="https://www.google.com" target=_blank> <!--blank so we google opens in next tab, 
+                                                        default is self therefor google will open in same tab-->
+        Google blank
+    </a><br>
+    <a href="https://www.google.com" title="this takes u to google"> <!--this show a mssg when cursor on the link-->
+        Google title
+    </a><br>
+    <a href="page2.html">
+        go to page 2
+    </a><br>
+    <a href="mailto:fake@gmail.com">
+        email me
+    </a><br>
+    <a href="https://en.wikipedia.org/wiki/Tiger">
+        <img src="tiger.jpeg" height="250" alt="this is tiger's image" title="tiger">
+    </a><br>
+    <audio controls src="Waltz-of-the-flowers.mp3"></audio><br>
+    <!--video ke liye video tag and src="" controls, width-->
+    <p>this is normal text</p>
+    <p>this is <b>bold</b> text</p>
+    <p>this is <i>italic</i> text</p>
+    <p>this is <big>Big</big> text</p>
+    <p>this is <small>small</small> text</p>
+    <p>this is <sub>sub</sub> text</p>
+    <p>this is <sup>sup</sup> text</p>
+    <p>this is <ins>inserted</ins> text</p>
+    <p>this is <del>deleted</del> text</p>
+    <p>this is <mark>marked</mark> text</p><br>
+
+    <h2>Unordered List</h2>
+    <ul>
+        <li>
+            pen
+            <ul>
+                <li>ink</li>
+                <li>gel</li>
+                <li>ball</li>
+            </ul>
+        </li>
+        <li>
+            paper
+        </li>
+        <li>
+            eraser
+        </li>
+    </ul>
+    <h2>Ordered List</h2>
+    <ol type="A"> <!--default type is numbers-->
+        <li>wake up</li>
+        <li>wash</li>
+        <li>dress up</li>
+    </ol>
+    <h2>Description List</h2>
+    <dl>
+        <dt>HTML</dt>
+        <dd>it is a markup language</dd>
+        <dt>CSS</dt>
+        <dd>it is a like interior designing</dd>
+    </dl><br>
+    <!--tables-->
+    <h3>State hrs</h3>
+    <table bgcolor="black" width="700">
+        <tr bgcolor="grey">
+            <th width="100">Sunday</th>
+            <th width="100">Monday</th>
+            <th width="100">Tuesday</th>
+            <th width="100">Wednesday</th>
+            <th width="100">Thursday</th>
+            <th width="100">Friday</th>
+            <th width="100">Saturday</th>
+        </tr>
+        <tr bgcolor="lightgrey" align="center">
+            <td>Closed</td>
+            <td>9-5</td>
+            <td>9-5</td>
+            <td>9-5</td>
+            <td>9-5</td>
+            <td>9-5</td>
+            <td>Closed</td>
+        </tr>
+    </table><br>
+    <iframe src="https://www.google.com"></iframe>
+    <iframe src="page2.html"></iframe><br>
+    <button onclick="doSomething()">Click me</button>
+    <a href="https://www.google.com">
+        <button style="background-color: beige;color: brown; border: 0cap;">Google button</button>
+    </a>
+    <p id="test">Hellooo</p>
+    <script>
+        function doSomething() {
+            document.getElementById("test").innerHTML = "Good bye";
+        }
+    </script>
+
+    <form action="form.php" method="post">
+        <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="enter your name" required>
+        </div>
+        <br>
+        <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="enter your surname">
+        </div>
+        <br>
+        <div>
+            <label for="pass">Passowrd: </label>
+            <input type="password" id="pass" name="pass" required maxlength="8">
+        </div>
+        <br>
+        <div>
+            <label for="mail">Email: </label>
+            <input type="email" id="mail" name="mail" placeholder="abcd@gmail.com">
+        </div>
+        <br>
+        <div>
+            <label for="number">Phone num: </label>
+            <input type="tel" id="number" name="number">
+        </div>
+        <br>
+        <div>
+            <label for="date">birthdate: </label>
+            <input type="date" id="date" name="date">
+        </div>
+        <br>
+        <div>
+            <label for="num">Quantity: </label>
+            <input type="number" id="num" name="num">
+        </div>
+        <br>
+        <div>
+            <!--use for, id, value-->
+            <label>Mr.</label>
+            <input type="radio" name="title">
+
+            <label>Mrs.</label>
+            <input type="radio" name="title">
+
+            <label>PhD</label>
+            <input type="radio" name="totle">
+        </div>
+        <br>
+        <div>
+            <label for="paymnt">Payment: </label>
+            <select id="paymnt" name="paymnt">
+                <option value="online">online</option>
+                <option value="cash">cash</option>
+                <option value="card">card</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <label for="subscribe">subscribe</label>
+            <input type="checkbox" id="subscribe" name="subscribe">
+        </div>
+        <br>
+        <div>
+            <input type="reset">
+        </div>
+        <br>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+</body>
+
+</html>

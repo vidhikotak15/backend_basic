@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<html> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printing Press</title>
+    <link rel="stylesheet" href="homepage.css">
+</head> 
+<body>  
+	<header>
+        <h1>PDPU Print</h1>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Previous Copy</a>
+        <a href="#">About</a>
+        <a href="#">Admin</a>
+    </nav>
+    <script type="text/javascript">
+         
+        var a1;
+         var a2;
+         var a3;
+        var a4;
+         var b1;
+         var b2;
+         var b3;
+         var b4;
+  function tos(){
+     a1=document.getElementById('a1').value;
+         a2=document.getElementById('a2').value;
+         a3=document.getElementById('a3').value;
+         a4=document.getElementById('a4').value;
+         b1=document.getElementById('b1').value;
+         b2=document.getElementById('b2').value;
+         b3=document.getElementById('b3').value;
+         b4=document.getElementById('b4').value;
+  }
+  function abs(){
+        
+       const queueUpdation = (queue, timer, arrival, n, maxProccessIndex) => {
+            let zeroIndex;
+            for (let i = 0; i < n; i++) {
+                if (queue[i] == 0) {
+                    zeroIndex = i;
+                    break;
+                }
+            }
+            queue[zeroIndex] = maxProccessIndex + 1;
+        }
+ 
+        const queueMaintainence = (queue, n) => {
+            for (let i = 0; (i < n - 1) && (queue[i + 1] != 0); i++) {
+                let temp = queue[i];
+                queue[i] = queue[i + 1];
+                queue[i + 1] = temp;
+            }
+        }
+ 
+        const checkNewArrival = (timer, arrival, n, maxProccessIndex, queue) => {
+            if (timer <= arrival[n - 1]) {
+                let newArrival = false;
+                for (let j = (maxProccessIndex + 1); j < n; j++) {
+                    if (arrival[j] <= timer) {
+                        if (maxProccessIndex < j) {
+                            maxProccessIndex = j;
+                            newArrival = true;
+                        }
+                    }
+                }
+                //adds the incoming process to the ready queue
+                //(if any arrives)
+                if (newArrival)
+                    queueUpdation(queue, timer, arrival, n, maxProccessIndex);
+            }
+        }
+ 
+        //Driver Code
+        let n = 4;
+        let tq = 2;
+        let timer = 0;
+        let maxProccessIndex = 0;
+        let avgWait = 0;
+        let avgTT = 0;
+        const wait = [];
+        const turn = [];
+        const queue = [];
+        const temp_burst = [];
+        const complete = [];
+        const arrival = [a1,a2,a3,a4];
+        const burst = [b1,b2,b3,b4];
+ 
+        for (let i = 0; i < n; i++) {
+            temp_burst[i] = burst[i];
+        }
+ 
+        for (let i = 0; i < n; i++) {    //Initializing the queue and complete array
+            complete[i] = false;
+            queue[i] = 0;
+        }
+        while (timer < arrival[0])    //Incrementing Timer until the first process arrives
+            timer++;
+        queue[0] = 1;
+ 
+        while (true) {
+        let flag = true;
+            for (let i = 0; i < n; i++) {
+                if (temp_burst[i] != 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+                break;
+ 
+            for (let i = 0; (i < n) && (queue[i] != 0); i++) {
+                let ctr = 0;
+                while ((ctr < tq) && (temp_burst[queue[0] - 1] > 0)) {
+                    temp_burst[queue[0] - 1] -= 1;
+                    timer += 1;
+                    ctr++;
+ 
+                    // Checking and Updating the ready queue until all the processes arrive
+                    checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
+                }
+                // If a process is completed then store its exit time
+                // and mark it as completed
+                if ((temp_burst[queue[0] - 1] == 0) && (complete[queue[0] - 1] == false)) {
+                    //turn array currently stores the completion time
+                    turn[queue[0] - 1] = timer;
+                    complete[queue[0] - 1] = true;
+                }
+ 
+                // checks whether or not CPU is idle
+                let idle = true;
+                if (queue[n - 1] == 0) {
+                    for (let i = 0; i < n && queue[i] != 0; i++) {
+                        if (complete[queue[i] - 1] == false) {
+                            idle = false;
+                        }
+                    }
+                }
+                else
+                    idle = false;
+ 
+                if (idle) {
+                    timer++;
+                    checkNewArrival(timer, arrival, n, maxProccessIndex, queue);
+                }
+ 
+                //Maintaining the entries of processes
+                //after each premption in the ready Queue
+                queueMaintainence(queue, n);
+            }
+        }
+ 
+        for (let i = 0; i < n; i++) {
+            turn[i] = turn[i] - arrival[i];
+            wait[i] = turn[i] - burst[i];
+        }
+        document.write(`Time Quanta : ${tq}`);
+        document.write(`<br/>Number of Processes : ${n}`);
+        document.write(`<br/>Arrival Time of Processes : ${arrival}`);
+        document.write(`<br/>Burst Time of Processes : ${burst}`);
+ 
+        document.write("<br/>Program No. &nbsp  Arrival Time  &nbsp Burst Time  &nbsp  Wait Time  &nbsp  TurnAround Time <br/>");
+        for (let i = 0; i < n; i++) {
+            document.write(`${i + 1}&nbsp ${arrival[i]}&nbsp ${burst[i]}&nbsp ${wait[i]} &nbsp ${turn[i]} <br/>`);
+        }
+        for (let i = 0; i < n; i++) {
+            avgWait += wait[i];
+            avgTT += turn[i];
+        }
+        document.write(`<br/>Average wait time : ${avgWait / n}`);
+        document.write(`<br/>Average Turn Around Time : ${avgTT / n}`);
+    }
+</script> 
+<form>  
+Enter N:<input type="text" id="N" name="number"/><br/>    
+Enter ANo1:<input type="text" id="a1" name="number"/><br/> 
+Enter ANo2:<input type="text" id="a2" name="number"/><br/>
+Enter ANo3:<input type="text" id="a3" name="number"/><br/>
+Enter ANo4:<input type="text" id="a4" name="number"/><br/>
+Enter bNo1:<input type="text" id="b1" name="number"/><br/> 
+Enter bNo2:<input type="text" id="b2" name="number"/><br/>
+Enter bNo3:<input type="text" id="b3" name="number"/><br/>
+Enter bNo4:<input type="text" id="b4" name="number"/><br/>
+<input type="button" value="ets" onclick="ets()"/>
+<input type="button" value="tos" onclick="tos()"/>
+ <input type="button" value="abs" onclick="abs()"/> 
+</form> 
+</body>  
+</html>
