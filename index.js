@@ -4,36 +4,12 @@ const express = require('express');
 const app = express();
 
 const { MongoClient } = require('mongodb')
-// mongoose.connect('mongodb://localhost:27017')
-//     .then(() => console.log('connected'))
-//     .catch(() => {
-//         console.log('failed');
-//     });
-
-async function main() {
-    const client = new MongoClient('mongodb://127.0.0.1:27017/Student');
-    try {
-        await client.connect();
-        console.log("Connected to MongoDB");
-        const db = client.db();
-        const collection = db.collection('Student'); // Specify the collection name
-        // Insert a single document
-        const result = await collection.insertOne({
-            name: 'John Doe',
-            age: 21,
-            grade: 'A'
-        });
-        // Log the inserted document ID
-        console.log(`Inserted document ID: ${result.insertedId}`);
-    }
-    catch (e) {
-        console.error(e);
-    }
-    finally {
-        await client.close();
-    }
-}
-main().catch(console.error);
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1:27017/Student')
+    .then(() => console.log('connected'))
+    .catch((error) => {
+        console.log('failed, ', error);
+    });
 
 const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
