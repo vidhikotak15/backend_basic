@@ -2,7 +2,7 @@
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
     res.send("hello world")
 })
@@ -19,7 +19,19 @@ app.get('/jsontext', (req, res) => {
     res.json({ "mom": "venus" })
 })
 
+app.get('/api/jokes', (req, res) => {
+    const jokes = [{
+        id: 1,
+        title: '1 joke'
+    },
+    {
+        id: 2,
+        title: '2 joke'
+    }];
+    res.send(jokes);
+})
+
 app.listen(port, () => {
-    console.log(`listening to port ${port}`);
+    console.log(`listening to http://localhost/${port}`);
 })
 // console.log("hello world");
