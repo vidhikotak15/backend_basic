@@ -38,6 +38,22 @@ app.get('/api/product/:id', async (req, res) => {
     }
 })
 
+//update a product
+
+app.put('/api/product/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndUpdate(id, req.body);
+        if (!product) {
+            return res.status(404).json({ message: "product not found" });
+        }
+        const updatedproduct = await Product.findById(id);
+        res.status(200).json(updatedproduct);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 app.post('/api/products', async (req, res) => {
     // console.log(req.body);
     // res.send(req.body)
