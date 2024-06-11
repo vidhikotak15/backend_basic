@@ -6,6 +6,9 @@ const app = express();
 
 app.use(express.json());
 
+//if url encoded then use:
+//app.use(express.urlencoded({extended: false}));
+
 const { MongoClient } = require('mongodb')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://127.0.0.1:27017/Student')
