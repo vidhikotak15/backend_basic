@@ -3,11 +3,14 @@
 const express = require('express');
 const Product = require('./model/product.model.js')
 const app = express();
-
+//middleware
 app.use(express.json());
 
 //if url encoded then use:
 //app.use(express.urlencoded({extended: false}));
+
+//routes:
+//app.use('/api/products', productRoutes);
 
 const { MongoClient } = require('mongodb')
 const mongoose = require('mongoose')
@@ -31,7 +34,7 @@ app.get('/api/products', async (req, res) => {
     }
 })
 
-app.get('/api/product/:id', async (req, res) => {
+app.get('/api/products/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findById(id);
@@ -43,7 +46,7 @@ app.get('/api/product/:id', async (req, res) => {
 
 //update a product
 
-app.put('/api/product/:id', async (req, res) => {
+app.put('/api/products/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findByIdAndUpdate(id, req.body);
@@ -59,7 +62,7 @@ app.put('/api/product/:id', async (req, res) => {
 
 // delete a product
 
-app.delete('/api/product/:id', async (req, res) => {
+app.delete('/api/products/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const product = await Product.findByIdAndDelete(id);
